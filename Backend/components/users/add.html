@@ -1,0 +1,53 @@
+<div data-role="view" data-title="Add" data-model="app.users.addItemViewModel" data-bind="events: { show: onShow }" id="usersModelAddScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: strings.users.usersModel.addScreenHeaderValue"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_usersModel -->
+    <!-- END_CUSTOM_CODE_usersModel -->
+    <div id="editableListForm144" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+
+
+                    <label id="displayNameInputField" class="field km-listview-label field--text km-label-above">
+                        <span class="field__label" data-bind="text: strings.users.usersModel.editableListForm144.displayNameInput.title"></span>
+
+
+                        <input id="displayNameInput" data-bind="value: addFormData.displayNameInput" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="userNameInputField" class="field km-listview-label field--text">
+                        <span class="field__label" data-bind="text: strings.users.usersModel.editableListForm144.userNameInput.title"></span>
+
+
+                        <input id="userNameInput" data-bind="value: addFormData.userNameInput" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="passwordInputField" class="field km-listview-label field--password">
+                        <span class="field__label" data-bind="text: strings.users.usersModel.editableListForm144.passwordInput.title"></span>
+
+
+                        <input id="passwordInput" data-bind="value: addFormData.passwordInput" type="password">
+
+                    </label>
+                </li>
+            </ul>
+        </form>
+        <!-- START_CUSTOM_CODE_editableListForm144 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm144 -->
+    </div>
+</div>

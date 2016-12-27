@@ -14,9 +14,14 @@
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="app.js"></script>
+    <script src="bower_components/everlive/min/everlive.all.min.js"></script>
+    <script src="dataProviders/defender.js"></script>
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/masterDetailView/index.js"></script>
+    <script src="components/formView/index.js"></script>
+    <script src="components/users/index.js"></script>
     <script src="components/home/index.js"></script>
     <div data-role="layout" data-id="main">
         <header data-role="header">
@@ -27,6 +32,9 @@
         <footer data-role="footer">
             <div data-role="tabstrip" id="navigation-container">
                 <a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a>
+                <a href="components/users/view.html" data-icon="contacts"><span class="navigation-link-text" data-bind="text: strings.users.title"></span></a>
+                <a href="components/formView/view.html" data-icon="bookmarks"><span class="navigation-link-text" data-bind="text: strings.formView.title"></span></a>
+                <a href="components/masterDetailView/view.html" data-icon="organize"><span class="navigation-link-text" data-bind="text: strings.masterDetailView.title"></span></a>
             </div>
             <div id="navigation-container-more" style="display: none">
             </div>

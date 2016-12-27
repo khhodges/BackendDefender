@@ -1,4 +1,28 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.home" data-show="app.home.onShow" data-after-show="app.home.afterShow" id="homeScreen" class="screen">
+    <div id="homeModel" class="form-view screen__content screen__content--form add-item-view">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+
+
+                    <label id="textField1Field" class="field km-listview-label field--text">
+                        <span class="field__label" data-bind="text: strings.home.homeModel.editableListForm9.textField1.title"></span>
+
+
+                        <input id="textField1" data-bind="value: addFormData.textField1" type="text">
+
+                    </label>
+                </li>
+            </ul>
+
+            <div class="button-group">
+            </div>
+        </form>
+        <!-- START_CUSTOM_CODE_homeModel -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+        <!-- END_CUSTOM_CODE_homeModel -->
+    </div>
     <header data-role="header">
         <div data-role="navbar" class="header-text">
 

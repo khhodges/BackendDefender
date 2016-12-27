@@ -21,8 +21,8 @@
     var bootstrap = function() {
         $(function() {
             app.mobileApp = new kendo.mobile.Application(document.body, {
-                transition: 'slide',
-                skin: 'nova',
+                transition: 'fade',
+                skin: 'flat',
                 initial: 'components/home/view.html'
             });
 
@@ -36,11 +36,11 @@
             allItems = $('#navigation-container-more').find('a'),
             navigationShowMoreContent = '';
 
-            allItems.each(function(index) {
-                navigationShowMoreContent += '<li>' + allItems[index].outerHTML + '</li>';
-            });
+        allItems.each(function(index) {
+            navigationShowMoreContent += '<li>' + allItems[index].outerHTML + '</li>';
+        });
 
-             navigationShowMoreView.html(navigationShowMoreContent);
+        navigationShowMoreView.html(navigationShowMoreContent);
         kendo.bind($('#navigation-show-more-view'), app.showMore.viewModel);
 
         app.notification = $("#notify");
@@ -98,7 +98,26 @@
     };
 
     /// start appjs functions
+
+    kendo.data.binders.namePrefixedId = kendo.data.Binder.extend({
+        refresh: function() {
+            var value = this.bindings["namePrefixedId"].get(),
+                $element = $(this.element);
+
+            $element.attr('id', $element.attr('name') + value);
+        }
+    });
+
+    kendo.data.binders.forPrevElement = kendo.data.Binder.extend({
+        refresh: function() {
+            var value = this.bindings['forPrevElement'].get(),
+                $element = $(this.element);
+
+            $element.attr('for', $element.prev().attr('id'));
+        }
+    });
     /// end appjs functions
+
     app.showFileUploadName = function(itemViewName) {
         $('.' + itemViewName).off('change', 'input[type=\'file\']').on('change', 'input[type=\'file\']', function(event) {
             var target = $(event.target),
@@ -191,7 +210,7 @@
             var code = e.sender.get('currentCulture');
 
             updateStrings();
-        } else if (e.field.startsWith('strings')) {
+        } else if (e.field.indexOf('strings') === 0) {
             updateStrings();
         } else if (e.field === 'cultures' && e.action === 'add') {
             loadCulture(e.items[0].code);

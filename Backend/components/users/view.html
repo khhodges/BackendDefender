@@ -1,0 +1,33 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.users" data-show="app.users.onShow" data-after-show="app.users.afterShow" id="usersScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.users.title"></span>
+
+            <a data-role="button" data-align="right" data-bind="events: { click: usersModel.addClick }">Add</a></div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_users -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_users -->
+    <!--  Certain features like grouping and inset styling are not supported when endless scroll is enabled. -->
+
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="" data-template="usersModelTemplate" data-bind="source: usersModel.dataSource, events: {click: usersModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="true">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_usersModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_usersModel -->
+    <script type="text/x-kendo-template" id="usersModelTemplate">
+        <div class="image-with-text">
+            # data = app.users.usersModel.fixHierarchicalData(data); #
+
+            <h3>#: data['DisplayName'] #</h3>
+
+        </div>
+    </script>
+</div>

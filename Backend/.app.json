@@ -4,20 +4,368 @@
     {
       "type": "kendo-ui-mobile:view",
       "name": "home",
-      "components": [],
+      "components": [
+        {
+          "type": "kendo-ui-mobile:form",
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "textField1",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Text field",
+                  "inputType": "text",
+                  "titlePosition": "left",
+                  "inputTextType": "text",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "Notes"
+                }
+              ],
+              "name": "editableListForm9",
+              "formType": "add"
+            }
+          ],
+          "name": "homeModel",
+          "enableDataBinding": true,
+          "dataProvider": "defender",
+          "collection": "Activities"
+        }
+      ],
       "title": "Home View",
       "addToNavigation": true,
       "icon": "home"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "users",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "displayNameInput",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Display Name",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "DisplayName"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "userNameInput",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "User Name",
+                  "inputType": "text",
+                  "titlePosition": "left",
+                  "inputTextType": "text",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "Username"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "passwordInput",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Password",
+                  "inputType": "text",
+                  "titlePosition": "left",
+                  "inputTextType": "password",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "Password"
+                }
+              ],
+              "name": "editableListForm144",
+              "formType": "add"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "emIlEdit",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "eMail",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "Email"
+                }
+              ],
+              "name": "editableListForm55",
+              "formType": "edit"
+            }
+          ],
+          "name": "usersModel",
+          "dataProvider": "defender",
+          "collection": "Users",
+          "group": "ZipCode",
+          "headerField": "DisplayName",
+          "addItemForm": true,
+          "addScreenHeaderValue": "Create",
+          "editItemForm": true,
+          "editScreenHeaderSource": "dataBound",
+          "editScreenHeaderField": "DisplayName",
+          "deleteItemButton": true,
+          "deleteItemConfirmation": true,
+          "pullToRefresh": false,
+          "endlessScroll": true,
+          "isMapView": false,
+          "geoPointFieldAdditional": "DisplayName",
+          "serverSideSorting": true,
+          "serverSideSortingField": "DisplayName",
+          "serverSideSortingDirection": "asc",
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "DisplayName",
+          "detailSubHeaderField": "Username",
+          "detailDescriptionField": "Email"
+        }
+      ],
+      "title": "User Detail",
+      "addToNavigation": true,
+      "icon": "contacts"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "formView",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:form",
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "textAreaField",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Textarea field",
+                  "inputType": "textArea",
+                  "wideFieldTitlePosition": "top",
+                  "dataBinding": "JSON"
+                }
+              ],
+              "name": "editableListForm82",
+              "formType": "add"
+            }
+          ],
+          "name": "formViewModel",
+          "enableDataBinding": true,
+          "dataProvider": "defender",
+          "collection": "Users",
+          "submitButton": "Confirm",
+          "cancelButton": "Cancel"
+        }
+      ],
+      "title": "Form",
+      "addToNavigation": true,
+      "icon": "bookmarks"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "masterDetailView",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "connect",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Heading",
+                  "inputType": "heading",
+                  "headingSize": "h2",
+                  "value": "Connect Using"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink3",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Web Site",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "http",
+                  "dataBindingLinkAddress": "Website",
+                  "dataBindingLinkText": "Website"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink2",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Phone Call",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "tel",
+                  "dataBindingLinkAddress": "Phone",
+                  "dataBindingLinkText": "Phone"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink1",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Send Email Message",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "mailto",
+                  "dataBindingLinkAddress": "Email",
+                  "dataBindingLinkText": "Email"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Send SMS Message",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "sms",
+                  "dataBindingLinkAddress": "Phone",
+                  "dataBindingLinkText": "Place"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink4",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Hyperlink",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "geo",
+                  "dataBindingLinkAddress": "Location",
+                  "dataBindingLinkText": "Address"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "hyperlink5",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Hyperlink",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "view",
+                  "linkToView": "home",
+                  "linkText": "Partners"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "heading1",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Heading",
+                  "inputType": "heading",
+                  "headingSize": "h3",
+                  "value": "Loyalty Club Following"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "dataList",
+                  "dataBindingRelationChildren": "[{\"expand\":\"Email\",\"property\":\"Members\",\"type\":\"Users\",\"isArray\":true}]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Followed By",
+                  "inputType": "dataList",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingRelationParent": "Members"
+                }
+              ],
+              "name": "editableListForm111",
+              "formType": "detail"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "multipleSelect1",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[{\"expand\":\"Email\",\"property\":\"Members\",\"type\":\"Users\",\"isArray\":true}]",
+                  "title": "Multiple select",
+                  "inputType": "multipleSelect",
+                  "titlePosition": "left",
+                  "multipleSelectDisplay": "inline",
+                  "dataBindingMultipleSelectParent": "Members"
+                }
+              ],
+              "name": "editableListForm116",
+              "formType": "edit"
+            }
+          ],
+          "name": "masterDetailViewModel",
+          "dataProvider": "defender",
+          "collection": "Places",
+          "group": "City",
+          "filterField": "Place",
+          "headerField": "Place",
+          "subHeaderField": "Address",
+          "addItemForm": false,
+          "editItemForm": true,
+          "editScreenHeaderSource": "dataBound",
+          "editScreenHeaderField": "Place",
+          "deleteItemButton": true,
+          "deleteItemConfirmation": true,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": true,
+          "serverSideSortingField": "Address",
+          "serverSideSortingDirection": "asc",
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "City",
+          "detailSubHeaderField": "Place",
+          "detailDescriptionField": "Address"
+        }
+      ],
+      "title": "Partners",
+      "addToNavigation": true,
+      "icon": "organize"
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "kendo-ui-mobile:dataProvider",
+      "name": "defender",
+      "source": "everlive",
+      "everliveKey": "3t5oa8il0d0y02eq",
+      "offlineStorage": true,
+      "title": "Defender / Defender"
+    }
+  ],
   "name": "kendoUiMobileApp",
   "navigation": "tabstrip",
   "view": "home",
-  "transition": "slide",
+  "transition": "fade",
   "showMoreTab": true,
-  "skin": "nova",
-  "skinMainColor": "#32364c",
+  "skin": "flat",
+  "skinMainColor": "#1a1a1a",
   "skinTextColor": "#ffffff",
-  "skinAccentColor": "#ff4350"
+  "skinAccentColor": "#10c4b2"
 }
