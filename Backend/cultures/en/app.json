@@ -18,24 +18,7 @@
   "users": {
     "title": "User Detail",
     "usersModel": {
-      "editableListForm55": {
-        "dropdownlist": {
-          "title": "Service Label"
-        },
-        "multipleSelect": {
-          "title": "Media Options"
-        },
-        "emIlEdit": {
-          "title": "eMail",
-          "placeholder": "Type here ..."
-        }
-      },
       "addScreenHeaderValue": "Create",
-      "editableListForm138": {
-        "hyperlink6": {
-          "title": "Hyperlink"
-        }
-      },
       "editableListForm144": {
         "displayNameInput": {
           "title": "Display Name",
@@ -47,6 +30,12 @@
         },
         "passwordInput": {
           "title": "Password",
+          "placeholder": "Type here ..."
+        }
+      },
+      "editableListForm55": {
+        "emIlEdit": {
+          "title": "eMail",
           "placeholder": "Type here ..."
         }
       }
@@ -68,23 +57,20 @@
     "title": "Partners",
     "masterDetailViewModel": {
       "editableListForm111": {
-        "dataList": {
-          "title": "Followed By"
-        },
-        "hyperlink": {
-          "title": "Send SMS Message"
-        },
-        "hyperlink1": {
-          "title": "Send Email Message"
-        },
-        "hyperlink2": {
-          "title": "Phone Call"
+        "connect": {
+          "title": "Heading"
         },
         "hyperlink3": {
           "title": "Web Site"
         },
-        "connect": {
-          "title": "Heading"
+        "hyperlink2": {
+          "title": "Phone Call"
+        },
+        "hyperlink1": {
+          "title": "Send Email Message"
+        },
+        "hyperlink": {
+          "title": "Send SMS Message"
         },
         "hyperlink4": {
           "title": "Hyperlink"
@@ -95,11 +81,25 @@
         },
         "heading1": {
           "title": "Heading"
+        },
+        "dataList": {
+          "title": "Followed By"
         }
       },
       "editableListForm116": {
         "multipleSelect1": {
           "title": "Multiple select"
+        }
+      }
+    }
+  },
+  "favorites": {
+    "title": "Favorites",
+    "favoritesModel": {
+      "editableListForm151": {
+        "webSite": {
+          "title": "Home Page",
+          "linkText": "Visit Web Site in Browser"
         }
       }
     }

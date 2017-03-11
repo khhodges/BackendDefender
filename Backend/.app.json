@@ -347,6 +347,66 @@
       "title": "Partners",
       "addToNavigation": true,
       "icon": "organize"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "favorites",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "webSite",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Home Page",
+                  "inputType": "link",
+                  "titlePosition": "left",
+                  "linkType": "http",
+                  "dataBindingLinkAddress": "PlaceId",
+                  "linkText": "Visit Web Site in Browser"
+                }
+              ],
+              "name": "editableListForm151",
+              "formType": "list"
+            }
+          ],
+          "name": "favoritesModel",
+          "dataProvider": "defender",
+          "collection": "Jsonlists",
+          "filterField": "PlaceId",
+          "headerField": "PlaceId",
+          "iconField": true,
+          "subHeaderField": "Jsonfield",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": true,
+          "serverSideSortingField": "CreatedAt",
+          "serverSideSortingDirection": "desc",
+          "serverSidePaging": true,
+          "serverSidePagingSize": 100,
+          "itemActionView": "masterDetailView",
+          "itemActionPrimaryKey": "Id",
+          "itemActionSecondaryKey": "City",
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "Jsonfield"
+        }
+      ],
+      "title": "Favorites",
+      "addToNavigation": true,
+      "icon": "favorites"
     }
   ],
   "dataProviders": [
