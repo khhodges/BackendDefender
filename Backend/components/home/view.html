@@ -9,13 +9,15 @@
                         <span class="field__label" data-bind="text: strings.home.homeModel.editableListForm9.textField1.title"></span>
 
 
-                        <input id="textField1" data-bind="value: addFormData.textField1" type="text">
+                        <input id="textField1" data-bind="value: addFormData.textField1, attr: { placeholder: strings.home.homeModel.editableListForm9.textField1.placeholder }" type="text">
 
                     </label>
                 </li>
             </ul>
 
             <div class="button-group">
+                <a data-role="button" data-bind="events: { click: homeModel.cancel }, buttonText: strings.home.homeModel.cancelButton"></a>
+                <a class="primary" data-role="button" data-bind="events: { click: homeModel.submit }, buttonText: strings.home.homeModel.submitButton"></a>
             </div>
         </form>
         <!-- START_CUSTOM_CODE_homeModel -->

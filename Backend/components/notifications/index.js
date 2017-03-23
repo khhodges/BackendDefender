@@ -1,28 +1,48 @@
 'use strict';
 
-app.users = kendo.observable({
+app.notifications = kendo.observable({
     onShow: function() {},
     afterShow: function() {}
 });
-app.localization.registerView('users');
+app.localization.registerView('notifications');
 
-// START_CUSTOM_CODE_users
+// START_CUSTOM_CODE_notifications
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_users
+// END_CUSTOM_CODE_notifications
 (function(parent) {
     var dataProvider = app.data.defender,
         /// start global model properties
 
+        processImage = function(img) {
+
+            function isAbsolute(img) {
+                if  (img && img.match(/http:\/\/|https:\/\/|data:|\/\//g)) {
+                    return true;
+                }
+                return false;
+            }
+
+            if (!img) {
+                var empty1x1png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=';
+                img = 'data:image/png;base64,' + empty1x1png;
+            } else if (typeof img === 'string' && !isAbsolute(img)) {
+                var setup = dataProvider.setup || {};
+                img = setup.scheme + ':' + setup.url + setup.appId + '/Files/' + img + '/Download';
+            }
+
+            return img;
+        },
+
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
-            var model = parent.get('usersModel'),
+            var model = parent.get('notificationsModel'),
                 dataSource;
 
             if (model) {
                 dataSource = model.get('dataSource');
             } else {
-                parent.set('usersModel_delayedFetch', paramFilter || null);
+                parent.set('notificationsModel_delayedFetch', paramFilter || null);
                 return;
             }
 
@@ -65,13 +85,16 @@ app.localization.registerView('users');
         dataSourceOptions = {
             type: 'everlive',
             transport: {
-                typeName: 'Users',
+                typeName: 'Notifications',
                 dataProvider: dataProvider
             },
             change: function(e) {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
                     var dataItem = data[i];
+
+                    dataItem['PlaceUrl'] =
+                        processImage(dataItem['Place']);
 
                     /// start flattenLocation property
                     flattenLocationProperties(dataItem);
@@ -94,25 +117,24 @@ app.localization.registerView('users');
             schema: {
                 model: {
                     fields: {
-                        'DisplayName': {
-                            field: 'DisplayName',
+                        'Place': {
+                            field: 'Place',
+                            defaultValue: ''
+                        },
+                        'Reference': {
+                            field: 'Reference',
                             defaultValue: ''
                         },
                     }
                 }
             },
             serverFiltering: true,
-            serverSorting: true,
-            sort: {
-                field: 'DisplayName',
-                dir: 'asc'
-            },
             serverPaging: true,
-            pageSize: 50
+            pageSize: 5
         },
         /// start data sources
         /// end data sources
-        usersModel = kendo.observable({
+        notificationsModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
             fixHierarchicalData: function(data) {
                 var result = {},
@@ -166,73 +188,40 @@ app.localization.registerView('users');
                 return result;
             },
             itemClick: function(e) {
-                var dataItem = e.dataItem || usersModel.originalItem;
+                var dataItem = e.dataItem || notificationsModel.originalItem;
 
-                app.mobileApp.navigate('#components/users/details.html?uid=' + dataItem.uid);
+                app.mobileApp.navigate('components/users/view.html?filter=' + encodeURIComponent(JSON.stringify({
+                    field: 'Memberships',
+                    value: dataItem.Id,
+                    operator: 'eq'
+                })));
 
-            },
-            addClick: function() {
-                app.mobileApp.navigate('#components/users/add.html');
-            },
-            editClick: function() {
-                var uid = this.originalItem.uid;
-                app.mobileApp.navigate('#components/users/edit.html?uid=' + uid);
-            },
-            deleteItem: function() {
-                var dataSource = usersModel.get('dataSource');
-
-                dataSource.remove(this.originalItem);
-
-                dataSource.one('sync', function() {
-                    app.mobileApp.navigate('#:back');
-                });
-
-                dataSource.one('error', function() {
-                    dataSource.cancelChanges();
-                });
-
-                dataSource.sync();
-            },
-            deleteClick: function() {
-                var that = this;
-
-                navigator.notification.confirm(
-                    'Are you sure you want to delete this item?',
-                    function(index) {
-                        //'OK' is index 1
-                        //'Cancel' - index 2
-                        if (index === 1) {
-                            that.deleteItem();
-                        }
-                    },
-                    '', ['OK', 'Cancel']
-                );
             },
             detailsShow: function(e) {
                 var uid = e.view.params.uid,
-                    dataSource = usersModel.get('dataSource'),
+                    dataSource = notificationsModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
 
-                usersModel.setCurrentItemByUid(uid);
+                notificationsModel.setCurrentItemByUid(uid);
 
                 /// start detail form show
                 /// end detail form show
             },
             setCurrentItemByUid: function(uid) {
                 var item = uid,
-                    dataSource = usersModel.get('dataSource'),
+                    dataSource = notificationsModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
 
-                if (!itemModel.DisplayName) {
-                    itemModel.DisplayName = String.fromCharCode(160);
+                if (!itemModel.Place) {
+                    itemModel.Place = String.fromCharCode(160);
                 }
 
                 /// start detail form initialization
                 /// end detail form initialization
 
-                usersModel.set('originalItem', itemModel);
-                usersModel.set('currentItem',
-                    usersModel.fixHierarchicalData(itemModel));
+                notificationsModel.set('originalItem', itemModel);
+                notificationsModel.set('currentItem',
+                    notificationsModel.fixHierarchicalData(itemModel));
 
                 return itemModel;
             },
@@ -248,148 +237,24 @@ app.localization.registerView('users');
             currentItem: {}
         });
 
-    parent.set('addItemViewModel', kendo.observable({
-        /// start add model properties
-        /// end add model properties
-        /// start add model functions
-        /// end add model functions
-        onShow: function(e) {
-            this.set('addFormData', {
-                passwordInput: '',
-                userNameInput: '',
-                displayNameInput: '',
-                /// start add form data init
-                /// end add form data init
-            });
-            /// start add form show
-            /// end add form show
-        },
-        onCancel: function() {
-            /// start add model cancel
-            /// end add model cancel
-        },
-        onSaveClick: function(e) {
-            var addFormData = this.get('addFormData'),
-                filter = usersModel && usersModel.get('paramFilter'),
-                dataSource = usersModel.get('dataSource'),
-                addModel = {};
-
-            if (filter && filter.value && filter.field) {
-                addModel[filter.field] = filter.value;
-            }
-
-            function saveModel(data) {
-                /// start add form data save
-                addModel.Password = addFormData.passwordInput;
-                addModel.Username = addFormData.userNameInput;
-                addModel.DisplayName = addFormData.displayNameInput;
-                /// end add form data save
-
-                dataSource.add(addModel);
-                dataSource.one('change', function(e) {
-                    app.mobileApp.navigate('#:back');
-                });
-
-                dataSource.sync();
-                app.clearFormDomData('add-item-view');
-            };
-
-            /// start add form save
-            /// end add form save
-            /// start add form save handler
-            saveModel();
-            /// end add form save handler
-        }
-    }));
-
-    parent.set('editItemViewModel', kendo.observable({
-        /// start edit model properties
-        /// end edit model properties
-        /// start edit model functions
-        /// end edit model functions
-        editFormData: {},
-        onShow: function(e) {
-            var that = this,
-                itemUid = e.view.params.uid,
-                dataSource = usersModel.get('dataSource'),
-                itemData = dataSource.getByUid(itemUid),
-                fixedData = usersModel.fixHierarchicalData(itemData);
-
-            /// start edit form before itemData
-            /// end edit form before itemData
-
-            this.set('itemData', itemData);
-            this.set('editFormData', {
-                emIlEdit: itemData.Email,
-                /// start edit form data init
-                /// end edit form data init
-            });
-
-            /// start edit form show
-            /// end edit form show
-        },
-        linkBind: function(linkString) {
-            var linkChunks = linkString.split(':');
-            return linkChunks[0] + ':' + this.get('itemData.' + linkChunks[1]);
-        },
-        onSaveClick: function(e) {
-            var that = this,
-                editFormData = this.get('editFormData'),
-                itemData = this.get('itemData'),
-                dataSource = usersModel.get('dataSource');
-
-            /// edit properties
-            itemData.set('Email', editFormData.emIlEdit);
-            /// start edit form data save
-            /// end edit form data save
-
-            function editModel(data) {
-                /// start edit form data prepare
-                /// end edit form data prepare
-                dataSource.one('sync', function(e) {
-                    /// start edit form data save success
-                    /// end edit form data save success
-
-                    app.mobileApp.navigate('#:back');
-                });
-
-                dataSource.one('error', function() {
-                    dataSource.cancelChanges(itemData);
-                });
-
-                dataSource.sync();
-                app.clearFormDomData('edit-item-view');
-            };
-            /// start edit form save
-            /// end edit form save
-            /// start edit form save handler
-            editModel();
-            /// end edit form save handler
-        },
-        onCancel: function() {
-            /// start edit form cancel
-            /// end edit form cancel
-        }
-    }));
-
     if (typeof dataProvider.sbProviderReady === 'function') {
         dataProvider.sbProviderReady(function dl_sbProviderReady() {
-            parent.set('usersModel', usersModel);
-            var param = parent.get('usersModel_delayedFetch');
+            parent.set('notificationsModel', notificationsModel);
+            var param = parent.get('notificationsModel_delayedFetch');
             if (typeof param !== 'undefined') {
-                parent.set('usersModel_delayedFetch', undefined);
+                parent.set('notificationsModel_delayedFetch', undefined);
                 fetchFilteredData(param);
             }
         });
     } else {
-        parent.set('usersModel', usersModel);
+        parent.set('notificationsModel', notificationsModel);
     }
 
     parent.set('onShow', function(e) {
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
-            dataSourceOptions = usersModel.get('_dataSourceOptions'),
+            dataSourceOptions = notificationsModel.get('_dataSourceOptions'),
             dataSource;
 
         if (param || isListmenu) {
@@ -403,17 +268,17 @@ app.localization.registerView('users');
             }
         }
 
-        if (!usersModel.get('dataSource')) {
+        if (!notificationsModel.get('dataSource')) {
             dataSource = new kendo.data.DataSource(dataSourceOptions);
-            usersModel.set('dataSource', dataSource);
+            notificationsModel.set('dataSource', dataSource);
         }
 
         fetchFilteredData(param);
     });
 
-})(app.users);
+})(app.notifications);
 
-// START_CUSTOM_CODE_usersModel
+// START_CUSTOM_CODE_notificationsModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_usersModel
+// END_CUSTOM_CODE_notificationsModel

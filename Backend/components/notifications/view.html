@@ -1,0 +1,33 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.notifications" data-show="app.notifications.onShow" data-after-show="app.notifications.afterShow" id="notificationsScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.notifications.title"></span>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_notifications -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_notifications -->
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="notificationsModelTemplate" data-bind="source: notificationsModel.dataSource, events: {click: notificationsModel.itemClick}" data-pull-to-refresh="true"
+    data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_notificationsModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_notificationsModel -->
+    <script type="text/x-kendo-template" id="notificationsModelTemplate">
+        <div class="image-with-text">
+            # data = app.notifications.notificationsModel.fixHierarchicalData(data); #
+
+            <img src="#: data['PlaceUrl'] #">
+            <h3>#: data['Place'] #</h3>
+            <p>#: data['Reference'] #</p>
+        </div>
+    </script>
+</div>

@@ -13,6 +13,7 @@ app.localization.registerView('favorites');
 (function(parent) {
     var dataProvider = app.data.defender,
         /// start global model properties
+
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
             var model = parent.get('favoritesModel'),
@@ -266,8 +267,11 @@ app.localization.registerView('favorites');
             }
         }
 
-        dataSource = new kendo.data.DataSource(dataSourceOptions);
-        favoritesModel.set('dataSource', dataSource);
+        if (!favoritesModel.get('dataSource')) {
+            dataSource = new kendo.data.DataSource(dataSourceOptions);
+            favoritesModel.set('dataSource', dataSource);
+        }
+
         fetchFilteredData(param);
     });
 

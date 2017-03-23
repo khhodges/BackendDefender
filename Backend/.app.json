@@ -31,7 +31,9 @@
           "name": "homeModel",
           "enableDataBinding": true,
           "dataProvider": "defender",
-          "collection": "Activities"
+          "collection": "Activities",
+          "submitButton": "Confirm",
+          "cancelButton": "Cancel"
         }
       ],
       "title": "Home View",
@@ -407,6 +409,43 @@
       "title": "Favorites",
       "addToNavigation": true,
       "icon": "favorites"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "notifications",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "notificationsModel",
+          "dataProvider": "defender",
+          "collection": "Notifications",
+          "headerField": "Place",
+          "imageField": "Place",
+          "subHeaderField": "Reference",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": true,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": false,
+          "serverSidePaging": true,
+          "serverSidePagingSize": 5,
+          "itemActionView": "users",
+          "itemActionPrimaryKey": "Id",
+          "itemActionSecondaryKey": "Memberships",
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail"
+        }
+      ],
+      "title": "Notifications",
+      "addToNavigation": true,
+      "icon": "organize"
     }
   ],
   "dataProviders": [

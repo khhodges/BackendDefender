@@ -13,6 +13,7 @@ app.localization.registerView('masterDetailView');
 (function(parent) {
     var dataProvider = app.data.defender,
         /// start global model properties
+
         /// end global model properties
         fetchFilteredData = function(paramFilter, searchFilter) {
             var model = parent.get('masterDetailViewModel'),
@@ -425,8 +426,11 @@ app.localization.registerView('masterDetailView');
             }
         }
 
-        dataSource = new kendo.data.DataSource(dataSourceOptions);
-        masterDetailViewModel.set('dataSource', dataSource);
+        if (!masterDetailViewModel.get('dataSource')) {
+            dataSource = new kendo.data.DataSource(dataSourceOptions);
+            masterDetailViewModel.set('dataSource', dataSource);
+        }
+
         fetchFilteredData(param);
     });
 

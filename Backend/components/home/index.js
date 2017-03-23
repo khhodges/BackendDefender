@@ -28,11 +28,51 @@ app.localization.registerView('home');
             }
         },
         homeModel = kendo.observable({
+            submit: function() {
+                var addFormData = parent.get('addFormData'),
+                    addModel = {};
+
+                app.mobileApp.showLoading();
+
+                function saveModel(data) {
+                    /// start add form data save
+                    addModel.Notes = addFormData.textField1;
+                    /// end add form data save
+                    var dataSource = new kendo.data.DataSource(dataSourceOptions);
+                    dataSource.add(addModel);
+                    dataSource.one('change', function(e) {
+                        // datasource operation finished
+                        app.mobileApp.hideLoading();
+                        app.showNotification('Saved');
+                    });
+
+                    dataSource.one('error', function(error) {
+                        showErrorMessage(error.xhr || error);
+                    });
+
+                    dataSource.sync();
+                };
+
+                function showErrorMessage(error) {
+                    alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                    app.mobileApp.hideLoading();
+                }
+
+                /// start add form save
+                /// end add form save
+                /// start add form save handler
+                saveModel();
+                /// end add form save handler
+            },
             /// start add model functions
             /// end add model functions
 
-            /// start add model properties
-            /// end add model properties
+            cancel: function() {
+                    /// start add model cancel
+                    /// end add model cancel
+                }
+                /// start add model properties
+                /// end add model properties
 
         });
 
